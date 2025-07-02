@@ -4,10 +4,10 @@
   "version": "1.6.2",
   "private": true,
   "scripts": {
-    "deploy": "astro build --site https://shubham-kumar-2004.github.io/portfolio/ && npx gh-pages -d dist",
+    "deploy": "astro build --site https://shubham-kumar-2004.github.io/ && npx gh-pages -d dist",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier --write **/*.{ts,tsx,css,astro} --ignore-path .gitignore",

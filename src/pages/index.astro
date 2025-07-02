@@ -1,0 +1,104 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import { buttonVariants } from '@/components/ui/button'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getRecentPosts } from '@/lib/data-utils'
+
+const blog = await getRecentPosts(SITE.featuredPostCount)
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Home" />
+  <section>
+    <div class="rounded-lg border">
+      <div class="flex flex-col space-y-1.5 p-6">
+        <h3 class="text-3xl leading-none font-medium">hi, i'm shubham</h3>
+        <p class="text-muted-foreground text-sm">
+          interface kid with too many tabs open.
+        </p>
+      </div>
+      <div class="p-6 pt-0">
+        <p class="text-muted-foreground mb-2 text-sm">
+i design, code, overthink, and fix what i break. i like clean ui, loud music, fast planes, and learning by messing with things. i never really knew what i was doing, but i've always cared enough to figure it out.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">latest posts</h2>
+    <ul class="flex flex-col gap-y-4">
+      {
+        blog.map((post) => (
+          <li>
+            <BlogCard entry={post} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex justify-center">
+      <Link
+        href="/blog"
+        class={buttonVariants({ variant: 'ghost' }) + ' group'}
+      >
+        See all posts <span
+          class="ml-1.5 transition-transform group-hover:translate-x-1"
+          >&rarr;</span
+        >
+      </Link>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">work experience</h2>
+    <div class="flex flex-col gap-y-4">
+      <a href="https://getalby.com" target="_blank" class="group block rounded-lg border p-4 transition-colors hover:bg-accent/50 relative">
+        <span class="hidden sm:inline-block absolute top-4 right-4 text-muted-foreground text-sm whitespace-nowrap">May 2025 - Present</span>
+        <div class="flex items-start gap-2 flex-1 min-w-0">
+          <div class="flex-shrink-0 mt-1">
+            <img 
+              src="/static/logos/alby-logo.avif" 
+              alt="Alby Logo" 
+              class="h-12 w-12 object-contain"
+              width="48"
+              height="48"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg font-medium">Product Design Intern</h3>
+            <p class="text-lg text-muted-foreground">Alby</p>
+            <p class="text-muted-foreground text-sm mt-1">Contributing to open-source Bitcoin tools through the Summer of Bitcoin program</p>
+            <span class="text-muted-foreground text-sm mt-4 sm:hidden block">May 2025 - Present</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">education</h2>
+    <div class="flex flex-col gap-y-4">
+      <div class="rounded-lg border p-4 transition-colors hover:bg-accent/50 relative">
+        <span class="hidden sm:inline-block absolute top-4 right-4 text-muted-foreground text-sm whitespace-nowrap">Nov 2022 - May 2026</span>
+        <div class="flex items-start gap-2 flex-1 min-w-0">
+          <div class="flex-shrink-0 mt-1">
+            <img 
+              src="/static/logos/nit-trichy-logo.png" 
+              alt="NIT Trichy Logo" 
+              class="h-12 w-12 object-contain"
+              width="48"
+              height="48"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-lg font-medium text-foreground">National Institute of Technology, Tiruchirappalli</p>
+            <h3 class="text-muted-foreground mt-1">Instrumentation and Control Engineering</h3>
+            <span class="text-muted-foreground text-sm mt-4 sm:hidden block">Nov 2022 - May 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

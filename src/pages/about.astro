@@ -1,0 +1,143 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+
+// Read all images that exist in the `public/photos` directory. Since `public` is served as the web root at
+// runtime, the URLs we generate here can simply be `/photos/<filename>`.
+// Note: this code only runs at build-time, so using the Node `fs` module is fine.
+import fs from 'node:fs'
+import path from 'node:path'
+
+const photosDir = path.resolve(import.meta.env.PROJECT_ROOT ?? '.', 'public', 'photos')
+const images = fs.readdirSync(photosDir)
+  .filter((file) => /\.(png|jpe?g|gif|webp)$/i.test(file))
+  .map((file) => `/photos/${file}`)
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="i'm still figuring it out" />
+  <Breadcrumbs items={[{ label: 'About', icon: 'lucide:info' }]} />
+  
+  <h1 class="text-3xl font-medium text-foreground mb-0 mt-2">i'm still figuring it out</h1>
+
+  <section class="prose dark:prose-invert max-w-none">
+    <p class="text-muted-foreground">
+      hey, i'm shubham. i study at nit trichy, majoring in instrumentation and control engineering, which honestly i suck at. i'll graduate in 2026, and if things go to plan, i'll be off chasing a master's in hci/ixd or something close to that.
+    </p>
+    
+    <p class="text-muted-foreground">
+      i design, i build, i tweak the small stuff till it feels right. i care about clean ui, thoughtful motion, and the invisible details people skip over. i learn by messing around, doing things the hard way, and figuring it out mid-project.
+    </p>
+
+    <p class="text-muted-foreground">
+      i'm into lossless audio and music that hits just right. probably spent more than i should've on audio gear. no regrets. i like cars (dream is an m340i with a miltek exhaust) and read about planes for fun. sometimes i go planespotting. it's kinda peaceful.
+    </p>
+
+    <p class="text-muted-foreground">
+      in college, most people stick to the roadmap. i didn't. got into design through side projects, long nights figuring stuff out, and saying yes before i knew what i was doing. no real plan, just curiosity. for a while, i thought everyone else had it figured out. clean paths, big titles, shiny wins. i was just messing around, building things, getting stuff wrong, and hearing "this won't work" now and then.
+    </p>
+
+    <p class="text-muted-foreground">
+      but the more people i met, the more i realized most of it is just noise. it's not always as polished as it looks. and honestly, that made it easier to keep doing my thing.
+    </p>
+
+    <p class="text-muted-foreground">
+      i don't have a big vision or a five-year plan. i just try to make things that feel honest and don't suck. that's enough.
+    </p>
+
+    <p class="text-muted-foreground">
+      aside from all that, i've always had a strong curiosity about the world. travel, and the mix of experiences that come with different places, cultures, and landscapes, has shaped a lot of how i think and grow.
+    </p>
+
+    <!-- Photo Gallery -->
+    <div class="mt-12 mb-12">
+      <h2 class="text-2xl font-medium mb-6">moments</h2>
+      <div class="relative">
+        <div class="flex space-x-4 pb-4 overflow-x-auto scrollbar-hide">
+          {images.map((src) => (
+            <img
+              src={src}
+              alt="photo"
+              class="flex-shrink-0 w-64 h-64 rounded-lg object-cover"
+              loading="lazy"
+            />
+          ))}
+        </div>
+        
+        <!-- Gradient fade effect on the right side -->
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent"></div>
+      </div>
+      
+      <p class="text-sm text-muted-foreground/70 mt-2">
+        Scroll horizontally to view more →
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-medium mt-12 mb-6">beliefs</h2>
+    <ul class="space-y-2 pl-0 list-none text-muted-foreground">
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        just because it works doesn't mean it is right
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        care quietly
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        discomfort is good
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        pressure isn't always bad
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        the most rewarding things are usually the hardest to do
+      </li>
+    </ul>
+
+    <h2 class="text-2xl font-medium mt-12 mb-6">bucket list</h2>
+    <ul class="space-y-2 pl-0 list-none text-muted-foreground">
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        design something people actually use
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        get dangerously good at my craft
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        build my homelab
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        own a bmw m340i
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        write something that makes someone feel understood
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-muted-foreground/30"></span>
+        speak at a conference that i used to watch from the back row
+      </li>
+      <li class="relative pl-5">
+        <span class="absolute left-0 top-2.5 flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+        </span>
+        solo backpack across india
+      </li>
+    </ul>
+  </section>
+</Layout>
